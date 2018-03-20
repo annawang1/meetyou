@@ -1,0 +1,45 @@
+apply plugin: 'com.android.application'
+repositories {
+    maven { url "https://jitpack.io" }
+}
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.example.annawang.meetyou"
+        minSdkVersion 21
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("../meetyou.keystore")
+            storePassword "meetyou"
+            keyAlias "meetyou.keystore"
+            keyPassword "meetyou"
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+ext {
+    aa_version = "4.4.0"
+    supportVersion = "26.1.0"
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "com.android.support:appcompat-v7:$supportVersion"
+    implementation 'com.plattysoft.leonids:LeonidsLib:1.3.2'
+    annotationProcessor "org.androidannotations:androidannotations:$aa_version"
+    implementation "org.androidannotations:androidannotations-api:$aa_version"
+    implementation 'com.github.elevenetc:textsurface:0.9.1'
+}
